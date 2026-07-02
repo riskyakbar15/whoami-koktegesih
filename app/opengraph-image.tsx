@@ -71,6 +71,22 @@ export default function OpengraphImage() {
       >
         riskyakbar.my.id · UID 0xA1F4-CYB3R
       </div>
+      <div
+        style={{
+          position: "absolute",
+          right: 56,
+          bottom: 56,
+          display: "flex",
+          fontSize: 26,
+          fontWeight: 700,
+          letterSpacing: 3,
+          color: "#0e1116",
+          backgroundColor: "#ff5c38",
+          padding: "14px 28px",
+        }}
+      >
+        VIEW DOSSIER →
+      </div>
     </div>,
     { ...size },
   );
