@@ -169,7 +169,7 @@ export const certificates: Certificate[] = [
   },
   {
     name: "Making Your Own 2G Network Private",
-    issuer: "IDSECONF × COCONUT (Makassar)",
+    issuer: "IDSECCONF × COCONUT (Makassar)",
     year: "2025",
     image: "/certificates/making-your-own-2G-network-private.png",
   },
