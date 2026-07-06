@@ -1,9 +1,9 @@
 ---
-title: OverTheWire Bandit — Levels 0 to 5
+title: OverTheWire Bandit — Levels 0 to 10
 date: 2026-05-18
 category: writeup
 tags: [linux, ssh, wargame]
-summary: Walking through the first Bandit levels to build core Linux command-line and SSH muscle memory — file reading, hidden files, and filtering by properties.
+summary: Walking through the first Bandit levels to build core Linux command-line and SSH muscle memory — file reading, hidden files, filtering by properties, and searching inside data.
 ---
 
 Bandit is the entry-point wargame on [OverTheWire](https://overthewire.org/wargames/bandit/).
@@ -54,21 +54,74 @@ cat inhere/...Hiding-From-You
 
 ## Level 4 → 5
 
-Only one file in `inhere/` is human-readable text. Let `file` classify them:
+Only one file in `inhere/` is human-readable text. Let `file` classify them,
+then read the one that comes back as text:
 
 ```bash
 file inhere/*
-cat inhere/-file07
+cat "$(file inhere/* | grep text | cut -d: -f1)"
+```
+
+## Level 5 → 6
+
+The password is in a file under `inhere/` with a specific fingerprint:
+human-readable, exactly 1033 bytes, and not executable. Let `find` filter by
+all three at once:
+
+```bash
+find inhere/ -type f -size 1033c ! -executable
+cat "$(find inhere/ -type f -size 1033c ! -executable)"
+```
+
+## Level 6 → 7
+
+This time the file is somewhere on the whole system — owned by user `bandit7`,
+group `bandit6`, and 33 bytes in size. Silence the permission-denied noise with
+`2>/dev/null`:
+
+```bash
+find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null
+```
+
+## Level 7 → 8
+
+The password sits in `data.txt`, right next to the word `millionth`. `grep`
+pulls the matching line out of thousands:
+
+```bash
+grep millionth data.txt
+```
+
+## Level 8 → 9
+
+The password is the only line in `data.txt` that appears exactly once. `sort`
+groups duplicates so that `uniq -u` can isolate the single unique line:
+
+```bash
+sort data.txt | uniq -u
+```
+
+## Level 9 → 10
+
+The password is one of a few human-readable strings inside the binary
+`data.txt`, preceded by several `=` characters. `strings` extracts the readable
+text, then `grep` narrows it down:
+
+```bash
+strings data.txt | grep '===='
 ```
 
 ## Commands worth internalizing
 
-| Command   | Why it matters                              |
-| --------- | ------------------------------------------- |
-| `ls -la`  | Reveals hidden dotfiles and permissions     |
-| `file`    | Identifies content type without guessing    |
-| `find`    | Filters by size, owner, and permission bits |
-| `cat ./-` | Escapes filenames that break naive commands |
+| Command           | Why it matters                                  |
+| ----------------- | ----------------------------------------------- |
+| `ls -la`          | Reveals hidden dotfiles and permissions         |
+| `file`            | Identifies content type without guessing        |
+| `find`            | Filters by size, owner, and permission bits     |
+| `cat ./-`         | Escapes filenames that break naive commands     |
+| `grep`            | Finds a word or pattern inside noisy files      |
+| `sort \| uniq -u` | Isolates the one line that occurs a single time |
+| `strings`         | Extracts readable text from binary data         |
 
 ## Takeaway
 
