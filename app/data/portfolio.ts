@@ -7,7 +7,7 @@ export const profile = {
   location: "Makassar, ID",
   status: "SECURE",
   summary:
-    "Networking and cyber security student with a red-team mindset. My roots are in computer networks, and my focus now leans offensive — web application pentesting, network enumeration, and Active Directory basics — practiced in the lab and documented as clear, reproducible writeups. Active in the security community through COCONUT Computer Club and regular CTF practice.",
+    "Networking and cyber security student with a red-team mindset. My roots are in computer networks, and my focus now leans offensive — web application pentesting, network enumeration, and Active Directory basics — practiced in the lab and documented as clear, reproducible writeups. Active in the security community through COCONUT Computer Club.",
 };
 
 export type SocialIcon = "email" | "github" | "linkedin" | "instagram";
@@ -166,6 +166,12 @@ export const certificates: Certificate[] = [
     issuer: "Indigo AI Connect",
     year: "2025",
     image: "/certificates/build-your-own-ai-sidekick.png",
+  },
+  {
+    name: "Making Your Own 2G Network Private",
+    issuer: "IDSECONF × COCONUT (Makassar)",
+    year: "2025",
+    image: "/certificates/making-your-own-2G-network-private.png",
   },
   {
     name: "Cyber Security Penetration Testing",

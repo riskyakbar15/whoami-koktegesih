@@ -142,7 +142,7 @@ export default function CredentialsGallery() {
                         {ref}
                       </span>
                     </div>
-                    <div className="p-4">
+                    <div className="p-3">
                       <h3 className="font-display text-base font-medium text-paper">
                         {cert.name}
                       </h3>
