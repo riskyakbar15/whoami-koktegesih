@@ -145,11 +145,18 @@ export type Badge = {
 
 export const badges: Badge[] = [
   {
+    name: "CCNA",
+    issuer: "Cisco Networking Academy",
+    image: "/badges/ccna-introduction-to-networks.png",
+    verifyHref:
+      "https://www.credly.com/badges/4ca14769-1b14-4c52-a696-bec9c8684a9f/public_url",
+  },
+  {
     name: "Ethical Hacker",
     issuer: "Cisco Networking Academy",
     image: "/badges/ethical-hacker.png",
     verifyHref:
-      "https://www.credly.com/badges/b3e51bd9-2425-40e4-8dec-67cc4578a7e6",
+      "https://www.credly.com/badges/b3e51bd9-2425-40e4-8dec-67cc4578a7e6/public_url",
   },
 ];
 
