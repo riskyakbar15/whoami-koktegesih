@@ -145,7 +145,7 @@ export type Badge = {
 
 export const badges: Badge[] = [
   {
-    name: "CCNA",
+    name: "Introduction to Networks",
     issuer: "Cisco Networking Academy",
     image: "/badges/ccna-introduction-to-networks.png",
     verifyHref:
