@@ -37,7 +37,7 @@ export default function BlogList({ posts }: { posts: PostCard[] }) {
             <button
               key={filter.value}
               type="button"
-              aria-pressed={isActive}
+              aria-pressed={isActive ? "true" : "false"}
               onClick={() => setActive(filter.value)}
               className={`inline-flex min-h-10 items-center rounded border px-3 tracking-widest uppercase transition-colors ${
                 isActive
