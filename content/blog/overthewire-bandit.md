@@ -128,3 +128,7 @@ strings data.txt | grep '===='
 The early Bandit levels are muscle memory: reading awkward filenames, spotting
 hidden files, and classifying unknown data. These same reflexes show up later
 during enumeration on real engagements.
+
+**Continue:** [Bandit — Levels 10 to 20](/blog/overthewire-bandit-11-20) picks up
+from here with encoding, layered compression, network services, and a first
+taste of privilege escalation.
