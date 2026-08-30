@@ -78,6 +78,7 @@ export default function Hero() {
               alt={`Subject photo — ${profile.codename}`}
               fill
               fetchPriority="high"
+              loading="eager"
               quality={50}
               sizes="(min-width: 1024px) 256px, 100vw"
               className="object-cover grayscale contrast-125"
