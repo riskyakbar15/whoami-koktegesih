@@ -77,7 +77,8 @@ export default function Hero() {
               src="/hero.jpg"
               alt={`Subject photo — ${profile.codename}`}
               fill
-              priority
+              fetchPriority="high"
+              quality={50}
               sizes="(min-width: 1024px) 256px, 100vw"
               className="object-cover grayscale contrast-125"
             />
