@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import BlogHeader from "../../components/BlogHeader";
+import CodeBlock from "../../components/CodeBlock";
 import Footer from "../../components/Footer";
 import { formatDate } from "@/lib/format";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
@@ -39,7 +40,7 @@ export default async function BlogPostPage({ params }: Params) {
 
   return (
     <div className="flex flex-1 flex-col">
-      <BlogHeader />
+      <BlogHeader backHref="/blog" backLabel="BACK TO FIELD NOTES" />
       <main className="flex-1">
         <article className="mx-auto max-w-3xl px-5 py-16">
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
@@ -60,7 +61,10 @@ export default async function BlogPostPage({ params }: Params) {
           </div>
 
           <div className="prose-dossier mt-10">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{ pre: CodeBlock }}
+            >
               {post.content}
             </ReactMarkdown>
           </div>
