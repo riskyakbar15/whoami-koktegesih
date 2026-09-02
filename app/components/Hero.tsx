@@ -80,7 +80,7 @@ export default function Hero() {
               fetchPriority="high"
               loading="eager"
               quality={50}
-              sizes="(min-width: 1024px) 256px, 100vw"
+              sizes="(min-width: 1024px) 256px, 384px"
               className="object-cover grayscale contrast-125"
             />
             <span className="pointer-events-none absolute bottom-2 left-2 font-mono text-[10px] tracking-widest text-accent mix-blend-difference">
