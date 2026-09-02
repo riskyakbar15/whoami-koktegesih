@@ -24,7 +24,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Risky Akbar: Cyber Security Portfolio",
+    default: "Risky Akbar - Cyber Security Portfolio",
     template: "%s · Risky Akbar",
   },
   description:
@@ -48,15 +48,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Risky Akbar: Cyber Security Portfolio",
-    title: "Risky Akbar: Cyber Security Portfolio",
+    siteName: "Risky Akbar - Cyber Security Portfolio",
+    title: "Risky Akbar - Cyber Security Portfolio",
     description:
       "Classified dossier of an informatics student concentrating in cyber security.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Risky Akbar: Cyber Security Portfolio",
+    title: "Risky Akbar - Cyber Security Portfolio",
     description:
       "Classified dossier of an informatics student concentrating in cyber security.",
   },
