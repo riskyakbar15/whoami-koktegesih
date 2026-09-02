@@ -230,8 +230,16 @@ body {
   color: var(--faint);
   font-style: italic;
 }
+.prose-dossier img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
 .prose-dossier table {
   width: 100%;
+  min-width: 30rem;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
