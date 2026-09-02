@@ -137,8 +137,8 @@ understanding attack flows like this is no longer optional.
   Martin Corporation.
 - [Anatomy of a Lumma Stealer attack via fake CAPTCHA pages](https://www.infostealers.com/article/anatomy-of-a-lumma-stealer-attack-via-fake-captcha-pages/), infostealers.com.
 
-<!-- lang:id -->
 <!-- markdownlint-disable MD024 -->
+<!-- lang:id -->
 
 CAPTCHA selama ini dikenal sebagai mekanisme keamanan sederhana untuk membedakan
 manusia dari bot. Namun dalam beberapa tahun terakhir, konsep ini justru dipelintir
