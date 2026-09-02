@@ -49,6 +49,7 @@ export const socials: Social[] = [
 export type SkillGroup = {
   category: string;
   code: string;
+  level: 1 | 2 | 3 | 4 | 5;
   items: string[];
 };
 
@@ -56,6 +57,7 @@ export const skills: SkillGroup[] = [
   {
     category: "Fundamentals",
     code: "FND",
+    level: 3,
     items: [
       "Linux & Command Line",
       "Networking (TCP/IP, DNS, HTTP)",
@@ -66,6 +68,7 @@ export const skills: SkillGroup[] = [
   {
     category: "Offensive Security",
     code: "OFF",
+    level: 2,
     items: [
       "Web Application Pentesting (OWASP Top 10)",
       "Network Scanning & Enumeration",
@@ -76,11 +79,13 @@ export const skills: SkillGroup[] = [
   {
     category: "Tools",
     code: "TLS",
+    level: 3,
     items: ["Burp Suite", "Nmap", "Metasploit", "Git", "Docker"],
   },
   {
     category: "Languages & Scripting",
     code: "LNG",
+    level: 2,
     items: ["Bash", "Python", "JavaScript / TypeScript", "Go", "SQL"],
   },
 ];
