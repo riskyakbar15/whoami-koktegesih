@@ -139,6 +139,26 @@ export const projects: Project[] = [
     severity: "INFO",
     href: "https://github.com/IndalAwalaikal/INESA-AGROADVISOR",
   },
+  {
+    id: "CASE-005",
+    title: "Ilmu Falak: Transparent Qibla Direction PWA",
+    category: "Web Development",
+    summary:
+      "Client-side PWA for Qibla direction and prayer times that shows the math behind every value: great-circle azimuth with WMM 2025 magnetic declination correction, and NOAA solar position for the sun-based and Rashdul Qibla methods. Runs fully offline and in-browser, so location never leaves the device.",
+    stack: ["Next.js", "React", "TypeScript", "PWA", "Docker"],
+    severity: "INFO",
+    href: "https://github.com/riskyakbar15/ilmu-falak",
+  },
+  {
+    id: "CASE-006",
+    title: "SRTP VoIP Security: RTP vs SRTP + TLS",
+    category: "VoIP Security",
+    summary:
+      "Proof of concept comparing VoIP security with and without encryption on Asterisk and PJSIP. Unencrypted RTP audio could be reconstructed and replayed in Wireshark, while SRTP-SDES for media and TLS for signaling left captured media unintelligible without the crypto keys.",
+    stack: ["Asterisk", "SRTP", "TLS", "Wireshark", "OpenSSL"],
+    severity: "HIGH",
+    href: "https://github.com/riskyakbar15/SRTP-VoIP-Security-Implementation",
+  },
 ];
 
 export type Badge = {
