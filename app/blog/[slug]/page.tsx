@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import type { ComponentPropsWithoutRef } from "react";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import BlogHeader from "../../components/BlogHeader";
 import CodeBlock from "../../components/CodeBlock";
+import ArticleLanguages from "../../components/ArticleLanguages";
 import Footer from "../../components/Footer";
 import { formatDate } from "@/lib/format";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
@@ -15,6 +17,18 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+// Keep wide tables from overflowing the viewport on small screens.
+function MarkdownTable({
+  node,
+  ...props
+}: ComponentPropsWithoutRef<"table"> & { node?: unknown }) {
+  return (
+    <div className="overflow-x-auto">
+      <table {...props} />
+    </div>
+  );
+}
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
@@ -38,11 +52,20 @@ export default async function BlogPostPage({ params }: Params) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const renderMarkdown = (md: string) => (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{ pre: CodeBlock, table: MarkdownTable }}
+    >
+      {md}
+    </ReactMarkdown>
+  );
+
   return (
     <div className="flex flex-1 flex-col">
       <BlogHeader backHref="/blog" backLabel="BACK TO FIELD NOTES" />
       <main className="flex-1">
-        <article className="mx-auto max-w-3xl px-5 py-16">
+        <article className="mx-auto max-w-3xl px-5 py-12 sm:py-16">
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
             {post.category}
           </p>
@@ -60,14 +83,18 @@ export default async function BlogPostPage({ params }: Params) {
             </div>
           </div>
 
-          <div className="prose-dossier mt-10">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{ pre: CodeBlock }}
-            >
-              {post.content}
-            </ReactMarkdown>
-          </div>
+          {post.contentId ? (
+            <div className="mt-10">
+              <ArticleLanguages
+                en={renderMarkdown(post.content)}
+                id={renderMarkdown(post.contentId)}
+              />
+            </div>
+          ) : (
+            <div className="prose-dossier mt-10">
+              {renderMarkdown(post.content)}
+            </div>
+          )}
         </article>
       </main>
       <Footer />

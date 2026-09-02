@@ -18,6 +18,7 @@ export type BlogPost = {
   tags: string[];
   summary: string;
   content: string;
+  contentId?: string;
 };
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -68,6 +69,8 @@ function readPost(fileName: string): BlogPost {
   const slug = fileName.replace(/\.md$/, "");
   const raw = fs.readFileSync(path.join(BLOG_DIR, fileName), "utf8");
   const { data, body } = parseFrontmatter(raw);
+  // A `<!-- lang:id -->` marker splits the body into English and Indonesian.
+  const [en, id] = body.trim().split(/\n?<!--\s*lang:id\s*-->\n?/i);
   return {
     slug,
     title: data.title ?? slug,
@@ -75,7 +78,8 @@ function readPost(fileName: string): BlogPost {
     category: toCategory(data.category),
     tags: parseTags(data.tags),
     summary: data.summary ?? "",
-    content: body.trim(),
+    content: en.trim(),
+    contentId: id ? id.trim() : undefined,
   };
 }
 
