@@ -71,6 +71,9 @@ function readPost(fileName: string): BlogPost {
   const { data, body } = parseFrontmatter(raw);
   // A `<!-- lang:id -->` marker splits the body into English and Indonesian.
   const [en, id] = body.trim().split(/\n?<!--\s*lang:id\s*-->\n?/i);
+  // Standalone HTML comments (e.g. markdownlint directives) must not render.
+  const clean = (md: string) =>
+    md.replace(/^[ \t]*<!--[\s\S]*?-->[ \t]*$/gm, "").trim();
   return {
     slug,
     title: data.title ?? slug,
@@ -78,8 +81,8 @@ function readPost(fileName: string): BlogPost {
     category: toCategory(data.category),
     tags: parseTags(data.tags),
     summary: data.summary ?? "",
-    content: en.trim(),
-    contentId: id ? id.trim() : undefined,
+    content: clean(en),
+    contentId: id ? clean(id) : undefined,
   };
 }
 

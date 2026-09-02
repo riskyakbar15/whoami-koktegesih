@@ -6,6 +6,8 @@ tags: [malware, social-engineering, threat-intel]
 summary: How attackers weaponize fake CAPTCHA pages to deploy the Lumma Stealer infostealer, mapped stage by stage onto the Cyber Kill Chain, from reconnaissance to data theft.
 ---
 
+<!-- markdownlint-disable MD024 -->
+
 CAPTCHA has long been a simple security control for telling humans apart from
 bots. In recent years, though, that same idea has been twisted into an effective
 lure. One of the clearest examples is the campaign that spreads **Lumma Stealer**
@@ -137,7 +139,6 @@ understanding attack flows like this is no longer optional.
   Martin Corporation.
 - [Anatomy of a Lumma Stealer attack via fake CAPTCHA pages](https://www.infostealers.com/article/anatomy-of-a-lumma-stealer-attack-via-fake-captcha-pages/), infostealers.com.
 
-<!-- markdownlint-disable MD024 -->
 <!-- lang:id -->
 
 CAPTCHA selama ini dikenal sebagai mekanisme keamanan sederhana untuk membedakan
