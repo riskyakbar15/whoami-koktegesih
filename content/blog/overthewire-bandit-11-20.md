@@ -1,9 +1,9 @@
 ---
-title: OverTheWire Bandit — Levels 10 to 20
+title: OverTheWire Bandit: Levels 10 to 20
 date: 2026-06-08
 category: writeup
 tags: [linux, ssh, encoding, wargame]
-summary: Continuing Bandit from level 10 — decoding data, peeling back layered compression, using SSH keys, talking to services with netcat and OpenSSL, port scanning, and abusing a setuid binary.
+summary: Continuing Bandit from level 10: decoding data, peeling back layered compression, using SSH keys, talking to services with netcat and OpenSSL, port scanning, and abusing a setuid binary.
 ---
 
 Picking up where [Levels 0 to 10](/blog/overthewire-bandit) left off, the middle
@@ -23,7 +23,7 @@ base64 -d data.txt
 
 ## Level 11 → 12
 
-The password is ROT13 — letters rotated 13 places. `tr` maps them back:
+The password is ROT13, letters rotated 13 places. `tr` maps them back:
 
 ```bash
 cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
@@ -38,15 +38,15 @@ tell you what you are looking at each step:
 ```bash
 mkdir /tmp/work && cp data.txt /tmp/work && cd /tmp/work
 xxd -r data.txt > data.bin
-file data.bin        # gzip? bzip2? tar? — decompress accordingly, then repeat
+file data.bin        # gzip? bzip2? tar? decompress accordingly, then repeat
 ```
 
 Rename and decompress in a loop (`gzip -d`, `bzip2 -d`, `tar xf`) until `file`
-finally reports ASCII text — that is the password.
+finally reports ASCII text, which is the password.
 
 ## Level 13 → 14
 
-There is no password here — just an SSH private key. Use it to log in as the
+There is no password here, just an SSH private key. Use it to log in as the
 next user:
 
 ```bash
@@ -75,7 +75,7 @@ openssl s_client -connect localhost:30001 -quiet
 ## Level 16 → 17
 
 The service is somewhere in ports 31000–32000. Scan for open ports, find the one
-speaking SSL, and submit the password — it returns an SSH key:
+speaking SSL, and submit the password, and it returns an SSH key:
 
 ```bash
 nmap -p 31000-32000 localhost
@@ -84,7 +84,7 @@ openssl s_client -connect localhost:<port> -quiet
 
 ## Level 17 → 18
 
-Two files differ by a single line. `diff` shows exactly what changed — the new
+Two files differ by a single line. `diff` shows exactly what changed; the new
 line is the password:
 
 ```bash
@@ -126,5 +126,8 @@ password file:
 
 These levels are a compact tour of the skills enumeration relies on: recognizing
 encodings, unwrapping nested formats, and coaxing answers out of network
-services. The setuid finale is a first taste of privilege escalation — the same
+services. The setuid finale is a first taste of privilege escalation, the same
 instinct that later turns a foothold into full compromise.
+
+**Continue:** [Bandit: Levels 20 to 34](/blog/overthewire-bandit-21-34) closes out
+the wargame with cron jobs, restricted-shell escapes, and the git-based levels.

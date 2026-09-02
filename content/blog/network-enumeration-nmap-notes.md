@@ -1,9 +1,9 @@
 ---
-title: Network Enumeration Notes — Nmap First Steps
+title: Network Enumeration Notes: Nmap First Steps
 date: 2026-06-09
 category: notes
 tags: [nmap, networking, recon]
-summary: A compact personal cheat sheet for the enumeration phase — host discovery, service and version detection, and reading results without drowning in flags.
+summary: A compact personal cheat sheet for the enumeration phase: host discovery, service and version detection, and reading results without drowning in flags.
 ---
 
 Enumeration is where most of the real work happens. Before exploiting anything,
@@ -40,8 +40,8 @@ nmap -sV -sC -p- 10.10.10.5
 Focus on three things first:
 
 1. **Open ports** and the services behind them
-2. **Version strings** — these map directly to known CVEs
-3. **Anything unusual** — odd ports often hide the intended path
+2. **Version strings**, which map directly to known CVEs
+3. **Anything unusual**, since odd ports often hide the intended path
 
 > Version detection is the bridge between enumeration and exploitation. A single
 > outdated banner can decide the whole engagement.

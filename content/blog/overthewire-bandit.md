@@ -1,16 +1,16 @@
 ---
-title: OverTheWire Bandit — Levels 0 to 10
+title: OverTheWire Bandit: Levels 0 to 10
 date: 2026-05-18
 category: writeup
 tags: [linux, ssh, wargame]
-summary: Walking through the first Bandit levels to build core Linux command-line and SSH muscle memory — file reading, hidden files, filtering by properties, and searching inside data.
+summary: Walking through the first Bandit levels to build core Linux command-line and SSH muscle memory: file reading, hidden files, filtering by properties, and searching inside data.
 ---
 
 Bandit is the entry-point wargame on [OverTheWire](https://overthewire.org/wargames/bandit/).
 Each level hands you credentials to SSH into the next. It looks trivial, but it
 quietly drills the Linux fundamentals every red-teamer leans on daily.
 
-> The goal is not to "win" — it is to make `ls`, `cat`, `find`, and `ssh` feel automatic.
+> The goal is not to "win". It is to make `ls`, `cat`, `find`, and `ssh` feel automatic.
 
 ## Level 0 → 1
 
@@ -75,7 +75,7 @@ cat "$(find inhere/ -type f -size 1033c ! -executable)"
 
 ## Level 6 → 7
 
-This time the file is somewhere on the whole system — owned by user `bandit7`,
+This time the file is somewhere on the whole system, owned by user `bandit7`,
 group `bandit6`, and 33 bytes in size. Silence the permission-denied noise with
 `2>/dev/null`:
 
@@ -129,6 +129,6 @@ The early Bandit levels are muscle memory: reading awkward filenames, spotting
 hidden files, and classifying unknown data. These same reflexes show up later
 during enumeration on real engagements.
 
-**Continue:** [Bandit — Levels 10 to 20](/blog/overthewire-bandit-11-20) picks up
+**Continue:** [Bandit: Levels 10 to 20](/blog/overthewire-bandit-11-20) picks up
 from here with encoding, layered compression, network services, and a first
 taste of privilege escalation.
