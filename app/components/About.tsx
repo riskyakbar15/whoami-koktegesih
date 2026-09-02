@@ -18,8 +18,8 @@ export default function About() {
             </p>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               {profile.role}. Every finding is documented into a reproducible
-              writeup — from exploitation steps to mitigation recommendations
-              you can apply right away.
+              writeup, from exploitation steps to mitigation recommendations you
+              can apply right away.
             </p>
           </Reveal>
         </div>

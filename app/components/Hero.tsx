@@ -9,7 +9,7 @@ export default function Hero() {
         <div>
           <p className="mb-6 inline-flex items-center gap-2 border border-line bg-panel px-3 py-1 font-mono text-xs tracking-widest text-gold">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            FILE OPEN — ACCESS GRANTED
+            FILE OPEN // ACCESS GRANTED
           </p>
 
           <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-paper sm:text-7xl">
@@ -46,7 +46,7 @@ export default function Hero() {
                 &ldquo;If you know the enemy and know yourself, you need not
                 fear the result of a hundred battles.&rdquo;
                 <span className="mt-2 block text-xs text-faint">
-                  — Sun Tzu, The Art of War
+                  Sun Tzu, The Art of War
                 </span>
               </dd>
             </div>
@@ -75,7 +75,7 @@ export default function Hero() {
           <div className="relative aspect-3/4 overflow-hidden border border-line bg-panel">
             <Image
               src="/hero.jpg"
-              alt={`Subject photo — ${profile.codename}`}
+              alt={`Subject photo: ${profile.codename}`}
               fill
               fetchPriority="high"
               loading="eager"

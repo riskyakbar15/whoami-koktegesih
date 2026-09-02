@@ -72,7 +72,7 @@ export default function CredentialsGallery() {
                   >
                     <Image
                       src={badge.image}
-                      alt={`Badge — ${badge.name}`}
+                      alt={`Badge: ${badge.name}`}
                       fill
                       draggable={false}
                       sizes="96px"
@@ -130,7 +130,7 @@ export default function CredentialsGallery() {
                     >
                       <Image
                         src={cert.image}
-                        alt={`Certificate — ${cert.name}`}
+                        alt={`Certificate: ${cert.name}`}
                         fill
                         draggable={false}
                         sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 100vw"
@@ -185,7 +185,7 @@ export default function CredentialsGallery() {
             <div className="relative">
               <Image
                 src={active.image}
-                alt={`Certificate — ${active.name}`}
+                alt={`Certificate: ${active.name}`}
                 width={1200}
                 height={900}
                 draggable={false}

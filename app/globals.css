@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Design tokens — "CLASSIFIED // ACCESS GRANTED" dossier theme
+   Design tokens: "CLASSIFIED // ACCESS GRANTED" dossier theme
    ============================================================ */
 :root {
   --ink: #0e1116; /* base background */
@@ -65,7 +65,7 @@ body {
 }
 
 /* ============================================================
-   Signature: redaction bars — "declassify" reveal
+   Signature: redaction bars, "declassify" reveal
    ============================================================ */
 .redacted {
   position: relative;
@@ -137,7 +137,7 @@ body {
 }
 
 /* ============================================================
-   Prose — markdown rendering for blog / field notes
+   Prose: markdown rendering for blog / field notes
    ============================================================ */
 .prose-dossier {
   color: var(--muted);

@@ -1,13 +1,13 @@
 export const profile = {
   codename: "koktegesih",
   name: "Risky Akbar",
-  role: "Informatics Student — Cyber Security Concentration",
+  role: "Informatics Student, Cyber Security Concentration",
   clearance: "JUNIOR",
   uid: "0xA1F4-CYB3R",
   location: "Makassar, ID",
   status: "SECURE",
   summary:
-    "Networking and cyber security student with a red-team mindset. My roots are in computer networks, and my focus now leans offensive — web application pentesting, network enumeration, and Active Directory basics — practiced in the lab and documented as clear, reproducible writeups. Active in the security community through COCONUT Computer Club.",
+    "Networking and cyber security student with a red-team mindset. My roots are in computer networks, and my focus now leans offensive: web application pentesting, network enumeration, and Active Directory basics, all practiced in the lab and documented as clear, reproducible writeups. Active in the security community through COCONUT Computer Club.",
 };
 
 export type SocialIcon = "email" | "github" | "linkedin" | "instagram";
@@ -101,14 +101,14 @@ export const projects: Project[] = [
     title: "OverTheWire: Bandit",
     category: "Wargame / Linux",
     summary:
-      "Worked through the Bandit wargame to build Linux command-line and SSH fundamentals — file manipulation, permissions, data encoding, and basic networking.",
+      "Worked through the Bandit wargame to build Linux command-line and SSH fundamentals: file manipulation, permissions, data encoding, and basic networking.",
     stack: ["Linux", "SSH", "Bash"],
     severity: "INFO",
     href: "/blog/overthewire-bandit",
   },
   {
     id: "CASE-002",
-    title: "PortSwigger Web Security Academy — XSS",
+    title: "PortSwigger Web Security Academy: XSS",
     category: "Web Exploitation",
     summary:
       "Completed the Cross-Site Scripting (XSS) labs on PortSwigger Web Security Academy, covering reflected, stored, and DOM-based XSS along with filter-bypass techniques.",
@@ -120,13 +120,13 @@ export const projects: Project[] = [
     title: "Vulnerable Machine Exploitation Lab",
     category: "Network Pentest",
     summary:
-      "Practiced network penetration on intentionally vulnerable machines (Metasploitable, VulnHub) — host discovery and service enumeration with Nmap, followed by exploiting identified services.",
+      "Practiced network penetration on intentionally vulnerable machines (Metasploitable, VulnHub). Host discovery and service enumeration with Nmap, followed by exploiting identified services.",
     stack: ["Nmap", "Metasploit", "Linux"],
     severity: "HIGH",
   },
   {
     id: "CASE-004",
-    title: "AgroAdvisor — Smart Agriculture Platform",
+    title: "AgroAdvisor: Smart Agriculture Platform",
     category: "Web Development",
     summary:
       "Organization team project for a precision-agriculture platform (AI-driven recommendations, IoT sensor monitoring, weather forecasting). Contributed to the frontend in the early phase; later completed by a teammate.",
@@ -197,20 +197,20 @@ export type TimelineEntry = {
 
 export const timeline: TimelineEntry[] = [
   {
-    period: "2020 — 2023",
+    period: "2020 to 2023",
     title: "SMK Teknik Komputer dan Jaringan",
     org: "SMKS Amamapare Energi Dan Pertambangan Mimika",
     detail:
-      "Vocational program in Computer & Network Engineering — network installation and configuration, hardware assembly and troubleshooting.",
+      "Vocational program in Computer & Network Engineering, covering network installation and configuration, hardware assembly, and troubleshooting.",
   },
   {
-    period: "2023 — Present",
+    period: "2023 to Present",
     title: "S1 Teknik Informatika",
     org: "Universitas Muhammadiyah Makassar",
     detail: "Concentration in Computer Networks and Cyber Security.",
   },
   {
-    period: "2024 — Present",
+    period: "2024 to Present",
     title: "Executive Board (BPH)",
     org: "COCONUT Computer Club",
     detail:
@@ -218,7 +218,7 @@ export const timeline: TimelineEntry[] = [
   },
   {
     period: "2025",
-    title: "Local Committee — IDSECCONF 2025",
+    title: "Local Committee, IDSECCONF 2025",
     org: "IDSECCONF × COCONUT (Makassar)",
     detail:
       "Served on the local organizing committee for IDSECCONF 2025 in Makassar, Indonesia's largest hacker and cyber security conference, as part of COCONUT Computer Club.",

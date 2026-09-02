@@ -17,7 +17,7 @@ export default function Contact() {
           <Reveal>
             <p className="text-lg leading-relaxed text-muted">
               Open to collaboration, internships, and security discussions.
-              Contact channels are listed below —{" "}
+              Contact channels are listed below,{" "}
               <Redacted>declassified</Redacted> and ready.
             </p>
             <p className="mt-6 font-mono text-sm text-faint">

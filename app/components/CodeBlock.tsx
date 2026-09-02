@@ -20,7 +20,7 @@ export default function CodeBlock({
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     } catch {
-      // Clipboard API unavailable (e.g. non-secure context) — fail silently.
+      // Clipboard API unavailable (e.g. non-secure context); fail silently.
     }
   };
 

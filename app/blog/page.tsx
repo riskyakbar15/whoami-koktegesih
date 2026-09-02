@@ -40,7 +40,7 @@ export default function BlogIndexPage() {
             Writeups &amp; Notes
           </h1>
           <p className="mt-4 max-w-2xl text-muted">
-            Documented findings from labs, wargames, and CTFs — plus notes on
+            Documented findings from labs, wargames, and CTFs, plus notes on
             networking and offensive security as I learn.
           </p>
           <div className="mt-12">
