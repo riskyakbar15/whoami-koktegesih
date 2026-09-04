@@ -8,10 +8,11 @@ const links = [
   { href: "#profile", label: "02 / Profile", short: "02" },
   { href: "#capabilities", label: "03 / Capabilities", short: "03" },
   { href: "#case-files", label: "04 / Case Files", short: "04" },
-  { href: "#certifications", label: "05 / Certifications", short: "05" },
+  { href: "#certifications", label: "05 / Certs", short: "05" },
   { href: "#track-record", label: "06 / Experience", short: "06" },
   { href: "#contact", label: "07 / Contact", short: "07" },
   { href: "/blog", label: "Blog ↗", short: "BLOG" },
+  { href: "/uses", label: "Uses ↗", short: "USES" },
 ];
 
 export default function Nav() {
