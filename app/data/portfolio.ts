@@ -119,6 +119,7 @@ export const projects: Project[] = [
       "Completed the Cross-Site Scripting (XSS) labs on PortSwigger Web Security Academy, covering reflected, stored, and DOM-based XSS along with filter-bypass techniques.",
     stack: ["Burp Suite", "JavaScript"],
     severity: "HIGH",
+    href: "/blog/portswigger-xss-labs",
   },
   {
     id: "CASE-003",
