@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import CommandPalette, { type PaletteItem } from "./components/CommandPalette";
+import { getAllPosts } from "@/lib/blog";
 import { profile, socials } from "./data/portfolio";
 
 const SITE_URL = "https://riskyakbar.my.id";
@@ -44,6 +46,9 @@ export const metadata: Metadata = {
   creator: "Risky Akbar",
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": `${SITE_URL}/feed.xml`,
+    },
   },
   openGraph: {
     type: "website",
@@ -95,6 +100,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const paletteItems: PaletteItem[] = [
+    { label: "Subject", href: "/#subject", group: "section" },
+    { label: "Profile", href: "/#profile", group: "section" },
+    { label: "Capabilities", href: "/#capabilities", group: "section" },
+    { label: "Case Files", href: "/#case-files", group: "section" },
+    { label: "Certifications", href: "/#certifications", group: "section" },
+    { label: "Experience", href: "/#track-record", group: "section" },
+    { label: "Contact", href: "/#contact", group: "section" },
+    { label: "Field Notes", href: "/blog", group: "page" },
+    { label: "Uses", href: "/uses", group: "page" },
+    ...getAllPosts().map((post) => ({
+      label: post.title,
+      href: `/blog/${post.slug}`,
+      group: post.category,
+    })),
+  ];
+
   return (
     <html
       lang="en"
@@ -107,9 +129,12 @@ export default function RootLayout({
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
         {children}
+        <CommandPalette items={paletteItems} />
       </body>
     </html>
   );
