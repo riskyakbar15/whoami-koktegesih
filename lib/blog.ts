@@ -19,6 +19,7 @@ export type BlogPost = {
   summary: string;
   content: string;
   contentId?: string;
+  readingMinutes: number;
 };
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -65,15 +66,15 @@ function toCategory(value: string | undefined): BlogCategory {
     : "article";
 }
 
-function readPost(fileName: string): BlogPost {
-  const slug = fileName.replace(/\.md$/, "");
-  const raw = fs.readFileSync(path.join(BLOG_DIR, fileName), "utf8");
+export function parsePost(raw: string, slug: string): BlogPost {
   const { data, body } = parseFrontmatter(raw);
   // A `<!-- lang:id -->` marker splits the body into English and Indonesian.
   const [en, id] = body.trim().split(/\n?<!--\s*lang:id\s*-->\n?/i);
   // Standalone HTML comments (e.g. markdownlint directives) must not render.
   const clean = (md: string) =>
     md.replace(/^[ \t]*<!--[\s\S]*?-->[ \t]*$/gm, "").trim();
+  const content = clean(en);
+  const words = content.split(/\s+/).filter(Boolean).length;
   return {
     slug,
     title: data.title ?? slug,
@@ -81,9 +82,16 @@ function readPost(fileName: string): BlogPost {
     category: toCategory(data.category),
     tags: parseTags(data.tags),
     summary: data.summary ?? "",
-    content: clean(en),
+    content,
     contentId: id ? clean(id) : undefined,
+    readingMinutes: Math.max(1, Math.round(words / 200)),
   };
+}
+
+function readPost(fileName: string): BlogPost {
+  const slug = fileName.replace(/\.md$/, "");
+  const raw = fs.readFileSync(path.join(BLOG_DIR, fileName), "utf8");
+  return parsePost(raw, slug);
 }
 
 export function getAllSlugs(): string[] {
