@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import BlogHeader from "../components/BlogHeader";
 import BlogList from "../components/BlogList";
 import Footer from "../components/Footer";
@@ -26,6 +27,7 @@ export default function BlogIndexPage() {
     category: post.category,
     tags: post.tags,
     summary: post.summary,
+    readingMinutes: post.readingMinutes,
   }));
 
   return (
@@ -44,7 +46,9 @@ export default function BlogIndexPage() {
             networking and offensive security as I learn.
           </p>
           <div className="mt-12">
-            <BlogList posts={posts} />
+            <Suspense fallback={null}>
+              <BlogList posts={posts} />
+            </Suspense>
           </div>
         </section>
       </main>
