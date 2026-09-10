@@ -1,13 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type BlogCategory = "writeup" | "tutorial" | "notes" | "article";
+export type BlogCategory = "writeup" | "tutorial" | "notes" | "article" | "log";
 
 export const BLOG_CATEGORIES: BlogCategory[] = [
   "writeup",
   "tutorial",
   "notes",
   "article",
+  "log",
 ];
 
 export type BlogPost = {

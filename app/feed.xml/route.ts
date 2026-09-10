@@ -14,7 +14,7 @@ function escapeXml(value: string): string {
 }
 
 export function GET() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().filter((post) => post.category !== "log");
   const updated = posts[0]?.date
     ? new Date(posts[0].date).toUTCString()
     : new Date().toUTCString();

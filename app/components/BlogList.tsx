@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { formatDate } from "../../lib/format";
 
-type BlogCategory = "writeup" | "tutorial" | "notes" | "article";
+type BlogCategory = "writeup" | "tutorial" | "notes" | "article" | "log";
 
 export type PostCard = {
   slug: string;
@@ -16,6 +16,7 @@ export type PostCard = {
   readingMinutes: number;
 };
 
+// `log` is personal writing: kept out of the base filters and the default view.
 const FILTERS: { label: string; value: BlogCategory | "all" }[] = [
   { label: "All", value: "all" },
   { label: "Writeups", value: "writeup" },
@@ -24,7 +25,14 @@ const FILTERS: { label: string; value: BlogCategory | "all" }[] = [
   { label: "Articles", value: "article" },
 ];
 
-const CATEGORIES = new Set<string>(FILTERS.map((f) => f.value));
+const CATEGORIES = new Set<string>([
+  "all",
+  "writeup",
+  "tutorial",
+  "notes",
+  "article",
+  "log",
+]);
 
 export default function BlogList({ posts }: { posts: PostCard[] }) {
   const router = useRouter();
@@ -37,9 +45,14 @@ export default function BlogList({ posts }: { posts: PostCard[] }) {
       : "all";
   const tag = params.get("tag");
 
+  // Log posts stay out of the default "All" view; reachable via their own filter.
+  const filters = posts.some((post) => post.category === "log")
+    ? [...FILTERS, { label: "Log", value: "log" as const }]
+    : FILTERS;
+
   const visible = posts.filter(
     (post) =>
-      (active === "all" || post.category === active) &&
+      (active === "all" ? post.category !== "log" : post.category === active) &&
       (!tag || post.tags.includes(tag)),
   );
 
@@ -59,7 +72,7 @@ export default function BlogList({ posts }: { posts: PostCard[] }) {
   return (
     <div>
       <div className="flex flex-wrap gap-2 font-mono text-xs">
-        {FILTERS.map((filter) => {
+        {filters.map((filter) => {
           const isActive = active === filter.value;
           return (
             <button
