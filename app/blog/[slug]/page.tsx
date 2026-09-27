@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import {
-  isValidElement,
-  type ComponentPropsWithoutRef,
-  type ReactNode,
-} from "react";
+import { type ComponentPropsWithoutRef } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -12,7 +9,15 @@ import CodeBlock from "../../components/CodeBlock";
 import ArticleLanguages from "../../components/ArticleLanguages";
 import Footer from "../../components/Footer";
 import { formatDate } from "@/lib/format";
-import { getAllSlugs, getPostBySlug } from "@/lib/blog";
+import { extractHeadings, slugify, toText } from "@/lib/markdown";
+import {
+  getAdjacentPosts,
+  getAllSlugs,
+  getPostBySlug,
+  getRelatedPosts,
+  getSeries,
+  tagSlug,
+} from "@/lib/blog";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -34,22 +39,6 @@ function MarkdownTable({
       <table {...props} />
     </div>
   );
-}
-
-function slugify(value: string): string {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function toText(node: ReactNode): string {
-  if (typeof node === "string" || typeof node === "number") return String(node);
-  if (Array.isArray(node)) return node.map(toText).join("");
-  if (isValidElement(node)) {
-    return toText((node.props as { children?: ReactNode }).children);
-  }
-  return "";
 }
 
 function Heading2({
@@ -76,16 +65,6 @@ function Heading3({
   );
 }
 
-// Top-level headings only, ignoring anything inside fenced code blocks.
-function extractHeadings(md: string) {
-  const prose = md.replace(/```[\s\S]*?```/g, "");
-  const matches = prose.matchAll(/^##\s+(.+)$/gm);
-  return Array.from(matches, (m) => {
-    const text = m[1].replace(/[`*_]/g, "").trim();
-    return { id: slugify(text), text };
-  });
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -107,6 +86,10 @@ export default async function BlogPostPage({ params }: Params) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+
+  const related = getRelatedPosts(slug);
+  const { previous, next } = getAdjacentPosts(slug);
+  const series = post.series ? getSeries(post.series) : [];
 
   const renderMarkdown = (md: string) => (
     <ReactMarkdown
@@ -199,12 +182,55 @@ export default async function BlogPostPage({ params }: Params) {
             <span>{post.readingMinutes} min read</span>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
-                <span key={tag} className="border border-line px-2 py-0.5">
+                <Link
+                  key={tag}
+                  href={`/tags/${tagSlug(tag)}`}
+                  className="border border-line px-2 py-0.5 transition-colors hover:border-accent/50 hover:text-accent"
+                >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </div>
+
+          {series.length > 1 && (
+            <nav
+              aria-label={`${post.series} series`}
+              className="mt-10 border border-line border-l-2 border-l-gold/50 bg-panel p-5"
+            >
+              <p className="font-mono text-[10px] tracking-widest text-faint">
+                {"// SERIES"}
+                <span className="ml-2 text-gold">{post.series}</span>
+              </p>
+              <ol className="mt-3 space-y-2">
+                {series.map((entry, i) => {
+                  const current = entry.slug === post.slug;
+                  return (
+                    <li key={entry.slug} className="flex gap-3 text-sm">
+                      <span className="font-mono text-[10px] leading-5 text-gold">
+                        {String(entry.part ?? i + 1).padStart(2, "0")}
+                      </span>
+                      {current ? (
+                        <span
+                          aria-current="page"
+                          className="font-medium text-paper"
+                        >
+                          {entry.title}
+                        </span>
+                      ) : (
+                        <Link
+                          href={`/blog/${entry.slug}`}
+                          className="text-muted transition-colors hover:text-accent"
+                        >
+                          {entry.title}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            </nav>
+          )}
 
           {post.contentId ? (
             <div className="mt-10">
@@ -217,6 +243,82 @@ export default async function BlogPostPage({ params }: Params) {
             <div className="prose-dossier mt-10">
               {renderArticle(post.content)}
             </div>
+          )}
+
+          {related.length > 0 && (
+            <section
+              aria-labelledby="related-heading"
+              className="mt-16 border-t border-line pt-8"
+            >
+              <h2
+                id="related-heading"
+                className="font-mono text-[10px] tracking-widest text-faint"
+              >
+                {"// RELATED FILES"}
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {related.map((item) => (
+                  <li
+                    key={item.slug}
+                    className="relative border border-line bg-panel p-4 transition-colors hover:border-accent/50"
+                  >
+                    <p className="font-mono text-[11px] text-faint">
+                      <span className="text-accent uppercase">
+                        {item.category}
+                      </span>
+                      <span className="mx-2">/</span>
+                      {item.readingMinutes} min read
+                    </p>
+                    <p className="mt-1 font-display text-base font-semibold text-paper">
+                      <Link
+                        href={`/blog/${item.slug}`}
+                        className="before:absolute before:inset-0"
+                      >
+                        {item.title}
+                      </Link>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {(previous || next) && (
+            <nav
+              aria-label="Post navigation"
+              className="mt-10 grid gap-3 border-t border-line pt-8 sm:grid-cols-2"
+            >
+              {previous ? (
+                <Link
+                  href={`/blog/${previous.slug}`}
+                  rel="prev"
+                  className="border border-line bg-panel p-4 transition-colors hover:border-accent/50"
+                >
+                  <span className="font-mono text-[10px] tracking-widest text-faint">
+                    ← OLDER
+                  </span>
+                  <span className="mt-1 block text-sm text-paper">
+                    {previous.title}
+                  </span>
+                </Link>
+              ) : (
+                <span aria-hidden className="hidden sm:block" />
+              )}
+              {next && (
+                <Link
+                  href={`/blog/${next.slug}`}
+                  rel="next"
+                  className="border border-line bg-panel p-4 text-right transition-colors hover:border-accent/50 sm:col-start-2"
+                >
+                  <span className="font-mono text-[10px] tracking-widest text-faint">
+                    NEWER →
+                  </span>
+                  <span className="mt-1 block text-sm text-paper">
+                    {next.title}
+                  </span>
+                </Link>
+              )}
+            </nav>
           )}
         </article>
       </main>
