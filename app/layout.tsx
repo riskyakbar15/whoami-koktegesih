@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import CommandPalette, { type PaletteItem } from "./components/CommandPalette";
 import { getAllPosts } from "@/lib/blog";
@@ -133,8 +135,16 @@ export default function RootLayout({
             __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        <a
+          href="#main"
+          className="sr-only rounded-sm font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:border focus:border-accent focus:bg-ink focus:px-4 focus:py-3 focus:text-accent"
+        >
+          Skip to content
+        </a>
         {children}
         <CommandPalette items={paletteItems} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
