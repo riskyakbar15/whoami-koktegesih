@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { profile } from "../data/portfolio";
 
 export default function Footer() {
@@ -8,8 +9,15 @@ export default function Footer() {
         <span>
           © {year} {profile.name} All Rights Reserved.
         </span>
-        <span className="tracking-widest">
-          {`END OF FILE // ${profile.uid} // ACCESS GRANTED`}
+        <span className="flex items-center gap-3 tracking-widest">
+          <Link
+            href="/security-policy"
+            className="transition-colors hover:text-accent"
+          >
+            SECURITY
+          </Link>
+          <span aria-hidden>·</span>
+          {`${profile.uid} // ACCESS GRANTED`}
         </span>
       </div>
     </footer>
