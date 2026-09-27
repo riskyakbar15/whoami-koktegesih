@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parsePost } from "./blog";
+import { parsePost, getPostBySlug } from "./blog";
 
 const base = `---
 title: Sample Post
@@ -57,5 +57,42 @@ describe("parsePost", () => {
   it("handles quoted frontmatter values", () => {
     const raw = `---\ntitle: "Quoted: Title"\n---\n\nBody.`;
     expect(parsePost(raw, "x").title).toBe("Quoted: Title");
+  });
+
+  it("marks a post as a draft only when draft is true", () => {
+    expect(parsePost(base, "s").draft).toBe(false);
+    const raw = `---\ntitle: X\ndraft: true\n---\n\nBody.`;
+    expect(parsePost(raw, "x").draft).toBe(true);
+  });
+
+  it("parses series name and part number", () => {
+    const raw = `---\ntitle: X\nseries: OverTheWire Bandit\npart: 2\n---\n\nBody.`;
+    const post = parsePost(raw, "x");
+    expect(post.series).toBe("OverTheWire Bandit");
+    expect(post.part).toBe(2);
+  });
+
+  it("leaves series and part undefined when absent", () => {
+    const post = parsePost(base, "s");
+    expect(post.series).toBeUndefined();
+    expect(post.part).toBeUndefined();
+  });
+});
+
+describe("getPostBySlug", () => {
+  it("rejects path traversal attempts", () => {
+    expect(getPostBySlug("../../../etc/passwd")).toBeNull();
+    expect(getPostBySlug("..%2F..%2Fsecret")).toBeNull();
+    expect(getPostBySlug("nested/path")).toBeNull();
+  });
+
+  it("returns null for an unknown but well formed slug", () => {
+    expect(getPostBySlug("no-such-post")).toBeNull();
+  });
+
+  it("loads a real post", () => {
+    expect(getPostBySlug("overthewire-bandit")?.series).toBe(
+      "OverTheWire Bandit",
+    );
   });
 });
