@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
 import BlogHeader from "../components/BlogHeader";
 import BlogList from "../components/BlogList";
 import Footer from "../components/Footer";
@@ -33,7 +34,7 @@ export default function BlogIndexPage() {
   return (
     <div className="flex flex-1 flex-col">
       <BlogHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section className="mx-auto max-w-5xl px-5 py-12 sm:py-16">
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
             Field Notes
@@ -45,6 +46,12 @@ export default function BlogIndexPage() {
             Documented findings from labs, wargames, and CTFs, plus notes on
             networking and offensive security as I learn.
           </p>
+          <Link
+            href="/tags"
+            className="mt-4 inline-flex items-center gap-2 font-mono text-xs text-faint transition-colors hover:text-accent"
+          >
+            Browse the tag index <span aria-hidden>→</span>
+          </Link>
           <div className="mt-12">
             <Suspense fallback={null}>
               <BlogList posts={posts} />
