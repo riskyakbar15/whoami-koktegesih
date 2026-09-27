@@ -4,6 +4,9 @@ import type { NextConfig } from "next";
 // (no middleware nonce); everything else is locked to same-origin.
 // 'unsafe-eval' is added only in dev, where React needs it for debugging.
 const isDev = process.env.NODE_ENV === "development";
+// In production Vercel serves analytics from the same origin (/_vercel/*);
+// only the dev debug bundles come from this host.
+const vercelInsights = isDev ? " https://va.vercel-scripts.com" : "";
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -12,9 +15,9 @@ const csp = [
   "frame-ancestors 'none'",
   "img-src 'self' data:",
   "object-src 'none'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${vercelInsights}`,
   "style-src 'self' 'unsafe-inline'",
-  "connect-src 'self'",
+  `connect-src 'self'${vercelInsights}`,
   "upgrade-insecure-requests",
 ].join("; ");
 
@@ -28,6 +31,8 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-DNS-Prefetch-Control", value: "off" },
+  { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
