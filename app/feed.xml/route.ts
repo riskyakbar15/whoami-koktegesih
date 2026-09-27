@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/blog";
+import { getPublicPosts } from "@/lib/blog";
 
 const SITE_URL = "https://riskyakbar.my.id";
 
@@ -14,7 +14,7 @@ function escapeXml(value: string): string {
 }
 
 export function GET() {
-  const posts = getAllPosts().filter((post) => post.category !== "log");
+  const posts = getPublicPosts();
   const updated = posts[0]?.date
     ? new Date(posts[0].date).toUTCString()
     : new Date().toUTCString();
