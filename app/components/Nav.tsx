@@ -51,7 +51,11 @@ export default function Nav() {
           return (
             <li key={l.href} className="shrink-0">
               {l.href.startsWith("#") ? (
-                <a href={l.href} className={className}>
+                <a
+                  href={l.href}
+                  className={className}
+                  aria-current={isActive ? "location" : undefined}
+                >
                   <span className="sm:hidden">{l.short}</span>
                   <span className="hidden sm:inline">{l.label}</span>
                 </a>

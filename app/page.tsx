@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex flex-1 flex-col">
       <StatusRail />
       <Nav />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <About />
         <Skills />

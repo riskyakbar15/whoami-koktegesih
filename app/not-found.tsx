@@ -2,7 +2,10 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-5 text-center">
+    <main
+      id="main"
+      className="flex min-h-screen flex-col items-center justify-center px-5 text-center"
+    >
       <p className="inline-flex items-center gap-2 border border-line bg-panel px-3 py-1 font-mono text-xs tracking-widest text-accent">
         <span className="h-1.5 w-1.5 rounded-full bg-accent" />
         ERROR 404 // FILE NOT FOUND

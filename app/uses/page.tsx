@@ -73,7 +73,7 @@ export default function UsesPage() {
   return (
     <div className="flex flex-1 flex-col">
       <BlogHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section className="mx-auto max-w-5xl px-5 py-12 sm:py-16">
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
             Equipment
