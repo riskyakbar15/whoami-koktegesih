@@ -22,8 +22,8 @@ export type Social = {
 export const socials: Social[] = [
   {
     label: "Email",
-    value: "riskyakbar690@gmail.com",
-    href: "mailto:riskyakbar690@gmail.com",
+    value: "contact.riskyakbar@gmail.com",
+    href: "mailto:contact.riskyakbar@gmail.com",
     icon: "email",
   },
   {
