@@ -2,6 +2,8 @@
 title: OverTheWire Bandit: Levels 10 to 20
 date: 2026-06-08
 category: writeup
+series: OverTheWire Bandit
+part: 2
 tags: [linux, ssh, encoding, wargame]
 summary: Continuing Bandit from level 10: decoding data, peeling back layered compression, using SSH keys, talking to services with netcat and OpenSSL, port scanning, and abusing a setuid binary.
 ---

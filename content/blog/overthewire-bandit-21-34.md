@@ -2,6 +2,8 @@
 title: OverTheWire Bandit: Levels 20 to 34
 date: 2026-06-29
 category: writeup
+series: OverTheWire Bandit
+part: 3
 tags: [linux, ssh, git, wargame]
 summary: Finishing Bandit: a setuid network daemon, reading passwords out of cron jobs, brute-forcing a PIN, escaping restricted shells with vi, and a full run through the git-based levels to the final flag.
 ---

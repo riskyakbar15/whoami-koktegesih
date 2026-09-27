@@ -2,6 +2,8 @@
 title: OverTheWire Bandit: Levels 0 to 10
 date: 2026-05-18
 category: writeup
+series: OverTheWire Bandit
+part: 1
 tags: [linux, ssh, wargame]
 summary: Walking through the first Bandit levels to build core Linux command-line and SSH muscle memory: file reading, hidden files, filtering by properties, and searching inside data.
 ---
