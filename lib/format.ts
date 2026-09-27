@@ -8,3 +8,12 @@ export function formatDate(iso: string): string {
     day: "numeric",
   });
 }
+
+export function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
