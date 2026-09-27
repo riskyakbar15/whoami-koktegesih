@@ -162,3 +162,6 @@ exfiltrate SMS (including one-time passwords) to an external channel.
   install only from official stores.
 - For defenders, the package name, hash, and C2 domains above make useful blocking
   and hunting indicators.
+
+For the same MobSF and JADX workflow applied to a safe training target, see the
+[AndroGoat static analysis](/blog/androgoat-static-analysis-mobsf-jadx).
